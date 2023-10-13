@@ -6,8 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // importing screens
-import Screen1 from './components/Screen1';
-import Screen2 from './components/Screen2';
+import StartScreen from './components/Start';
+import ChatScreen from './components/Chat';
 
 // create the navigator
 const Stack = createNativeStackNavigator();
@@ -15,27 +15,19 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Screen1'>
+      <Stack.Navigator initialRouteName='Start'>
         <Stack.Screen
-          name='Screen1'
-          component={Screen1}
+          name='Start'
+          component={StartScreen}
         />
         <Stack.Screen
-          name='Screen2'
-          component={Screen2}
+          name='ChatScreen'
+          component={ChatScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;
