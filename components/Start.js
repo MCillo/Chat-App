@@ -19,24 +19,25 @@ const StartScreen = ({ navigation }) => {
                 onChangeText={setName}
                 placeholder='Your Name?'
               />
-
-              <Text style={styles.chooseColorText} >Choose Background Color:</Text>
               <View style={styles.chooseColorContainer}>
-                {["#090C08", "#474056", "#8A95A5", "#B9C6AE"].map(
-                  (color, index) => (
-                    <TouchableOpacity
-                      key={index}
-                      style={[
-                        styles.colorChoice,
-                        { backgroundColor: color },
-                        selectedColor === color && styles.selectedColor,
-                      ]}
-                      onPress={() => setSelectedColor(color)}
-                    />
-                  )
-                )}
-              </View>
+                <Text style={styles.chooseColorText} >Choose Background Color:</Text>
 
+                <View style={styles.colorChoicesContainer}>
+                  {["#090C08", "#474056", "#8A95A5", "#B9C6AE"].map(
+                    (color, index) => (
+                      <TouchableOpacity
+                        key={index}
+                        style={[
+                          styles.colorChoice,
+                          { backgroundColor: color },
+                          selectedColor === color && styles.selectedColor,
+                        ]}
+                        onPress={() => setSelectedColor(color)}
+                      />
+                    )
+                  )}
+                </View>
+              </View>
               <TouchableOpacity
                 style={styles.chatButton}
                 title='Start Chatting'
@@ -74,12 +75,14 @@ const styles = StyleSheet.create({
   },
   controlsContainer: {
     alignItems: 'center',
+    justifyContent: 'space-evenly',
     width: '88%',
+    height: '44%',
     padding: 5,
     backgroundColor: '#ffffff'
   },
   textInput: {
-    textAlign: 'center',
+    textAlign: 'left',
     width: '88%',
     height: 50,
     padding: 15,
@@ -92,15 +95,22 @@ const styles = StyleSheet.create({
     opacity: 5
   },
   chooseColorContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20
+    width: '88%',
+    alignItems: 'flex-start'
   },
   chooseColorText: {
+    // alignSelf: 'baseline',
+    width: '88%',
     fontSize: 16,
     fontWeight: 300,
     color: '#757083',
     opacity: 100
+  },
+  colorChoicesContainer: {
+    // alignSelf: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20
   },
   colorChoice: {
     width: 50,
