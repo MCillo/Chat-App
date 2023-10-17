@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   appTitle: {
     width: '88%',
     fontSize: 45,
-    fontWeight: 600,
+    // fontWeight: 600,
     color: '#ffffff',
     alignItems: 'center'
   },
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     fontSize: 16,
-    fontWeight: 300,
+    // fontWeight: 300,
     color: '#757083',
     opacity: 5
   },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     // alignSelf: 'baseline',
     width: '88%',
     fontSize: 16,
-    fontWeight: 300,
+    // fontWeight: 300,
     color: '#757083',
     opacity: 100
   },
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   chatButtonText: {
     fontSize: 16,
-    fontWeight: 600,
+    // fontWeight: 600,
     color: '#ffffff',
   }
 
