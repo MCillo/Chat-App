@@ -1,4 +1,4 @@
-# Chatt App
+# Chat App
 This is a Chat App that was built using React Native, Expo, and Google Firestore Database. This app helped me learn and demonstrate my knowledge of Javascript mobile development. 
 
 ## Key Features
