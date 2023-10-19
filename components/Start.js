@@ -1,9 +1,27 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOpacity, Alert } from "react-native";
+
+// importing these for ability to sign in - in this case anonymously
+import { getAuth, signInAnonymously } from 'firebase/auth';
 
 const StartScreen = ({ navigation }) => {
+  // for getting user authorization
+  const auth = getAuth();
+
+  // for setting the users name and for setting user selected background color on chat screen
   const [name, setName] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
+
+  const signInUser = () => {
+    signInAnonymously(auth)
+      .then(result => {
+        navigation.navigate('ChatScreen', { userID: result.user.uid });
+        Alert.alert('Signed in Successfully!');
+      })
+      .catch((error) => {
+        Alert.alert('Unable to sign in at this time, please try again later!');
+      })
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -41,7 +59,7 @@ const StartScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.chatButton}
                 title='Start Chatting'
-                onPress={() => navigation.navigate('ChatScreen', { name: name, backgroundColor: selectedColor })}
+                onPress={() => navigation.navigate('ChatScreen', { signInUser, name: name, backgroundColor: selectedColor })}
               >
                 <Text style={styles.chatButtonText}>Start Chatting</Text>
               </TouchableOpacity>
