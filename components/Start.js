@@ -14,8 +14,8 @@ const StartScreen = ({ navigation }) => {
 
   const signInUser = () => {
     signInAnonymously(auth)
-      .then(result => {
-        navigation.navigate('ChatScreen', { userID: result.user.uid });
+      .then((result) => {
+        navigation.navigate('Chatscreen', { userID: result.user.uid, name, backgroundColor: backgroundColor });
         Alert.alert('Signed in Successfully!');
       })
       .catch((error) => {
