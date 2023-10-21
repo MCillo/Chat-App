@@ -5,8 +5,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import Start from './components/Start';
 import Chat from './components/Chat';
 
+import { useNetInfo } from '@react-native-community/netinfo'
+import { useEffect } from 'react';
+
 // initializing the app and importing firestore for storing the chat messages
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, disableNetwork, enableNetwork } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 
 // import react navigation
@@ -17,10 +20,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
 // logbox for ignoring warning alerts
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['AsyncStorage has been extracted from']);
+import { LogBox, Alert } from 'react-native';
+LogBox.ignoreLogs(['AsyncStorage has been extracted from', 'You are initializing Firebase Auth for']);
 
 const App = () => {
+
+  const connectionStatus = useNetInfo();
+
+  useEffect(() => {
+    if (connectionStatus.isConnected === false) {
+      Alert.alert('Connection Lost!');
+      disableNetwork(db);
+    } else if (connectionStatus.isConnected === true) {
+      enableNetwork(db);
+    }
+  }, [connectionStatus.isConnected]);
+
   // Chat-App firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyAtUJG-F_rSjX871Xkpni5Kd7dR5Udggqs",
@@ -48,7 +63,7 @@ const App = () => {
         <Stack.Screen
           name='Chat'
         >
-          {props => <Chat db={db} {...props} />}
+          {props => <Chat isConnected={connectionStatus.isConnected} db={db} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
