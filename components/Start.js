@@ -4,24 +4,25 @@ import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOp
 // importing these for ability to sign in - in this case anonymously
 import { getAuth, signInAnonymously } from 'firebase/auth';
 
-const StartScreen = ({ navigation }) => {
+const colors = ['rgb(9 11 8)', 'rgb(78, 93, 104)', 'rgb(153, 163, 177)', 'rgb(185 199 174)'];
+const Start = ({ navigation }) => {
   // for getting user authorization
   const auth = getAuth();
 
-  // for setting the users name and for setting user selected background color on chat screen
+  // for setting the users name and for setting user selected background color on Chat screen
   const [name, setName] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   const signInUser = () => {
     signInAnonymously(auth)
       .then((result) => {
-        navigation.navigate('Chatscreen', { userID: result.user.uid, name, backgroundColor: backgroundColor });
+        navigation.navigate('Chat', { userID: result.user.uid, name, color: selectedColor });
         Alert.alert('Signed in Successfully!');
       })
       .catch((error) => {
-        Alert.alert('Unable to sign in at this time, please try again later!');
-      })
-  }
+        Alert.alert('Unable to sign in at this time, please try again later!', error.message);
+      });
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -41,25 +42,34 @@ const StartScreen = ({ navigation }) => {
                 <Text style={styles.chooseColorText} >Choose Background Color:</Text>
 
                 <View style={styles.colorChoicesContainer}>
-                  {["#090C08", "#474056", "#8A95A5", "#B9C6AE"].map(
-                    (color, index) => (
+                  {colors.map((color) => {
+                    const fullColorButton = { ...styles.colorChoice, backgroundColor: color };
+                    const borderOnly = {
+                      ...styles.colorChoice, borderColor: color, borderWidth: 5
+                    };
+
+                    return color == selectedColor ? (
                       <TouchableOpacity
-                        key={index}
-                        style={[
-                          styles.colorChoice,
-                          { backgroundColor: color },
-                          selectedColor === color && styles.selectedColor,
-                        ]}
-                        onPress={() => setSelectedColor(color)}
-                      />
-                    )
-                  )}
+                        key={color}
+                        onPress={() => {
+                          setSelectedColor(color);
+                        }}
+                        style={fullColorButton}></TouchableOpacity>
+                    ) : (
+                      <TouchableOpacity
+                        key={color}
+                        onPress={() => {
+                          setSelectedColor(color);
+                        }}
+                        style={borderOnly}></TouchableOpacity>
+                    );
+                  })}
                 </View>
               </View>
               <TouchableOpacity
                 style={styles.chatButton}
                 title='Start Chatting'
-                onPress={() => navigation.navigate('ChatScreen', { signInUser, name: name, backgroundColor: selectedColor })}
+                onPress={signInUser}
               >
                 <Text style={styles.chatButtonText}>Start Chatting</Text>
               </TouchableOpacity>
@@ -154,4 +164,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default StartScreen;
+export default Start;
