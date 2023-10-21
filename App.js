@@ -1,6 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+// importing screens
+import Start from './components/Start';
+import Chat from './components/Chat';
+
+// initializing the app and importing firestore for storing the chat messages
+import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+
 // import react navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,18 +16,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // create the navigator
 const Stack = createNativeStackNavigator();
 
-// initializing the app and importing firestore for storing the chat messages
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-
-// importing screens
-import StartScreen from './components/Start';
-import ChatScreen from './components/Chat';
-
 // logbox for ignoring warning alerts
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['AsyncStorage has been extracted from']);
-
 
 const App = () => {
   // Chat-App firebase configuration
@@ -30,7 +29,7 @@ const App = () => {
     storageBucket: "chatapp-3d111.appspot.com",
     messagingSenderId: "166674648514",
     appId: "1:166674648514:web:d4ab1aa37cdecfda541a5b",
-    measurementId: "G-Y3P3V592J2"
+    // measurementId: "G-Y3P3V592J2"
   };
 
   // Initialize Firebase
@@ -44,17 +43,16 @@ const App = () => {
       <Stack.Navigator initialRouteName='Start'>
         <Stack.Screen
           name='Start'
-          component={StartScreen}
+          component={Start}
         />
         <Stack.Screen
-          name='ChatScreen'
+          name='Chat'
         >
-          {props => <ChatScreen db={db}{...props} />}
+          {props => <Chat db={db} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
 
 export default App;
