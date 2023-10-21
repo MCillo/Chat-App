@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, KeyboardAvoidingView, Platform, TouchableOpacit
 import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { collection, getDocs, addDoc, onSnapshot, query, where, orderBy } from "firebase/firestore";
 
-const ChatScreen = ({ route, navigation, db }) => {
+const Chat = ({ route, navigation, db }) => {
 
   const { name, backgroundColor, userID } = route.params;
   const [messages, setMessages] = useState([]);
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ChatScreen;
+export default Chat;
