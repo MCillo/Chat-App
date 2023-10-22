@@ -1,6 +1,7 @@
 # Chat App
 This is a Chat App that was built using React Native, Expo, and Google Firestore Database. This app helped me learn and demonstrate my knowledge of Javascript mobile development. 
 
+![Screenshot of Chatt-App](assets/Poppins/Chat-App%20Home%20Screen.png)
 ## Key Features
  1. A page where users can enter their name and choose a background color for the chat screen before joining the chat.
  2. A page displaying the conversation, as well as an input field and submit button
