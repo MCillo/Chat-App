@@ -62,7 +62,7 @@ This is a Chat App that was built using React Native, Expo, and Google Firestore
     - to `allow read, write: if true;`
     - Press Publish
 
-### Install Necessary Packages
+### Install the Necessary Packages
 ```
 npm install --save @react-navigation/native @react-navigation/native-stack
 expo install react-native-screens react-native-safe-area-context
