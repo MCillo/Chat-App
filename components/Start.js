@@ -2,10 +2,17 @@ import { useState } from "react";
 import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOpacity, Alert } from "react-native";
 
 // importing these for ability to sign in - in this case anonymously
-import { getAuth, signInAnonymously } from 'firebase/auth';
-
+import { getAuth, initializeAuth, signInAnonymously, getReactNativePersistence } from 'firebase/auth';
+import { ReactNativeAsyncStorage } from "firebase/auth";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const colors = ['rgb(9 11 8)', 'rgb(78, 93, 104)', 'rgb(153, 163, 177)', 'rgb(185 199 174)'];
 const Start = ({ navigation }) => {
+
+  // Trying out updated AsyncStorage Code
+  // const auth = initializeAuth(app, {
+  //   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+  // });
+
   // for getting user authorization
   const auth = getAuth();
 
