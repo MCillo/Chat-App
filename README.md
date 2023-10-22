@@ -2,7 +2,7 @@
 This is a Chat App that was built using React Native, Expo, and Google Firestore Database. This app helped me learn and demonstrate my knowledge of Javascript mobile development. 
 
 ![Screenshot of Chatt-App](assets/Chat-App%20Homescreen.png)
-<img src='assets/Chat-App Homescreen.png' width='150' height='200'>
+<img src='assets/Chat-App Homescreen.png' width='300' height='600'>
 ## Key Features
  1. A page where users can enter their name and choose a background color for the chat screen before joining the chat.
  2. A page displaying the conversation, as well as an input field and submit button
@@ -26,12 +26,12 @@ This is a Chat App that was built using React Native, Expo, and Google Firestore
 
 ### Setting up the application environment
 - Create a New React Native project
-- `npm create-expo-app chat_app --template`
+  - `npm create-expo-app chat_app --template`
 -  Install Expo
--  `npm install - expo-cli`
+   -  `npm install - expo-cli`
 -  Start Expo
--  `npm start`
+   -  `npm start`
 
 ### Setting up Google Firebase
-- Link to Google Firebase https://firebase.google.com
+- Google Firebase https://firebase.google.com
   - Sign up for a Firebase account
