@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 
 // initializing the app and importing firestore for storing the chat messages
 import { getFirestore, disableNetwork, enableNetwork } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 
 // import react navigation
@@ -21,7 +22,7 @@ const Stack = createNativeStackNavigator();
 
 // logbox for ignoring warning alerts
 import { LogBox, Alert } from 'react-native';
-LogBox.ignoreLogs(['AsyncStorage has been extracted from', 'You are initializing Firebase Auth for']);
+LogBox.ignoreLogs(['AsyncStorage has been extracted from', 'You are initializing Firebase Auth for React Native without providing AsyncStorage']);
 
 const App = () => {
 
@@ -50,8 +51,10 @@ const App = () => {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
+
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
+  const storage = getStorage(app);
 
   return (
     <NavigationContainer>
@@ -63,7 +66,7 @@ const App = () => {
         <Stack.Screen
           name='Chat'
         >
-          {props => <Chat isConnected={connectionStatus.isConnected} db={db} {...props} />}
+          {props => <Chat isConnected={connectionStatus.isConnected} db={db} storage={storage} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
